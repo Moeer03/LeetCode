@@ -1,21 +1,8 @@
 class Solution:
-    def countMaxOrSubsets(self, nums):
-        self.max_or = 0
-        self.count = 0
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        pair_idx = {}
 
-        def backtrack(i, curr_or):
-            if i == len(nums):
-                if curr_or > self.max_or:
-                    self.max_or = curr_or
-                    self.count = 1
-                elif curr_or == self.max_or:
-                    self.count += 1
-                return
-            # Include nums[i]
-            backtrack(i + 1, curr_or | nums[i])
-            # Exclude nums[i]
-            backtrack(i + 1, curr_or)
-
-        backtrack(0, 0)
-        return self.count
-''
+        for i, num in enumerate(nums):
+            if target - num in pair_idx:
+                return [i, pair_idx[target - num]]
+            pair_idx[num] = i
